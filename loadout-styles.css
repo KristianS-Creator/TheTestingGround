@@ -1,0 +1,245 @@
+/* --------------------------------------------------
+   THEME VARIABLES
+   -------------------------------------------------- */
+
+/* Default theme (dark mode) */
+:root {
+  /* Spacing scale */
+  --space-s: .5rem;
+  --space-m: 1rem;
+  --space-l: 2rem;
+
+  /* Typography scale */
+  --font-s: 1rem;
+  --font-m: 1.25rem;
+  --font-l: 1.75rem;
+  --font-xl: 2.25rem;
+
+  /* Colors */
+  --color-bg: #222429;
+  --color-bg-light: #3c4043;
+  --color-text: #f3f4f4;
+
+  --color-primary: #3740ff;
+  --color-primary-light: #5060ff;
+}
+
+/* --------------------------------------------------
+   BASE
+   -------------------------------------------------- */
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  line-height: 1.6;
+  padding: var(--space-l) 0;
+}
+
+/* --------------------------------------------------
+   GRID LAYOUT
+   -------------------------------------------------- */
+
+#container {
+  display: grid;
+  gap: var(--space-l);
+  margin: var(--space-l);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "main"
+    "left"
+    "right"
+    "footer";
+}
+
+/* Tablet */
+@media (width > 768px) {
+  #container {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "header header header header"
+      "main main main main"
+      "left left right right"
+      "footer footer footer footer";
+  }
+}
+
+/* Desktop */
+@media (width > 1024px) {
+  #container {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas:
+      "header header header"
+      "left main right"
+      "footer footer footer";
+  }
+}
+
+/* --------------------------------------------------
+   SECTIONS
+   -------------------------------------------------- */
+
+header, main, .left-side, .right-side, footer {
+  padding: var(--space-l);
+  border-radius: 12px;
+  background: var(--color-bg-light);
+}
+
+header { grid-area: header; }
+.left-side { grid-area: left; background: var(--color-primary); }
+.right-side { grid-area: right; }
+main { grid-area: main; }
+footer { grid-area: footer; }
+
+/* --------------------------------------------------
+   CONTENT WRAPPER (for readable text)
+   -------------------------------------------------- */
+
+.content {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+/* --------------------------------------------------
+   NAVIGATION
+   -------------------------------------------------- */
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+  padding: var(--space-m);
+  background: var(--color-primary);
+  border-radius: 20px;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--color-text);
+  padding: .5rem 1rem;
+  border-radius: 12px;
+}
+
+nav a:hover,
+nav a.active {
+  background: var(--color-primary-light);
+}
+
+/* --------------------------------------------------
+   TEXT
+   -------------------------------------------------- */
+
+h1 {
+  font-size: var(--font-xl);
+  line-height: 1.2;
+  max-width: 50ch;
+}
+
+h2 {
+  font-size: var(--font-l);
+  max-width: 50ch;
+}
+
+p {
+  max-width: 65ch;
+  margin-bottom: var(--space-m);
+}
+
+/* --------------------------------------------------
+   IMAGE SAFETY
+   -------------------------------------------------- */
+
+img {
+  max-width: 100%;
+  display: block;
+  background: var(--color-bg-light);   
+  border-radius: 8px;                  
+  padding: var(--space-s);             /* giver luft omkring ikoner/grafik */
+}
+
+/* --------------------------------------------------
+   CARD COMPONENT (for portfolio, projects, etc.)
+   -------------------------------------------------- */
+
+.card {
+  background: var(--color-bg-light);
+  padding: var(--space-l);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px hsl(0 0% 0% / .2);
+  margin-bottom: var(--space-l);
+}
+
+/* --------------------------------------------------
+   TEXT BOX (note, info, highlight)
+   -------------------------------------------------- */
+
+.text-box {
+  background: var(--color-bg-light);
+  border-left: 6px solid var(--color-primary);
+  padding: var(--space-m);
+  border-radius: 12px;
+  max-width: 65ch;
+  margin-bottom: var(--space-l);
+  box-shadow: 0 2px 6px hsl(0 0% 0% / .15);
+}
+
+.text-box h3 {
+  margin-top: 0;
+  font-size: var(--font-m);
+}
+
+.text-box p {
+  margin: 0;
+}
+
+.text-box.warning { border-left-color: #ffcc00; }
+.text-box.danger { border-left-color: #ff4d4d; }
+.text-box.hint { border-left-color: #4dff88; }
+
+/* --------------------------------------------------
+   IMAGE GALLERY COMPONENT
+   -------------------------------------------------- */
+
+.gallery {
+  display: grid;
+  gap: var(--space-l);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: var(--space-l);
+}
+
+.gallery-item {
+  background: var(--color-bg-light);
+  padding: var(--space-s);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px hsl(0 0% 0% / .2);
+  overflow: hidden; /* sikrer at hover-zoom ikke stikker ud */
+  transition: background-color .3s ease, transform .2s ease;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform .3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+}
+
+.gallery-item img:hover {
+  transform: scale(1.05);
+}
+
+.gallery-caption {
+  margin-top: var(--space-s);
+  font-size: var(--font-s);
+  text-align: center;
+}
